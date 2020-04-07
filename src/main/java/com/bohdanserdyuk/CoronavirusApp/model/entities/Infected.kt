@@ -9,8 +9,8 @@ import javax.persistence.Id
 data class Infected(
         @Id
         @GeneratedValue
-        val id: Int,
-        val name: String,
-        val address: String,
-        val age: Int
-) : Serializable
+        val id: Int = 0,
+        val name: String = "",
+        val address: String = "",
+        val age: Int= 0
+)

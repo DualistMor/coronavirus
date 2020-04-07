@@ -7,11 +7,11 @@ import javax.persistence.ManyToOne
 
 @Entity
 data class Treatment(
-    @Id
-    @GeneratedValue
-    val id: Int,
-    val doctorId: Int,
-    val infectedId: Int,
-    @ManyToOne
-    var vaccine: Vaccine?
+        @Id
+        @GeneratedValue
+        val id: Int = 0,
+        val doctorId: Int = 0,
+        val infectedId: Int = 0,
+        @ManyToOne
+        var vaccine: Vaccine? = null
 )

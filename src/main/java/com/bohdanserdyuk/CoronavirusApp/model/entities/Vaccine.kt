@@ -6,9 +6,9 @@ import javax.persistence.Id
 
 @Entity
 data class Vaccine(
-    @Id
-    @GeneratedValue
-    var id: Int,
-    var name: String,
-    var recoveryChance: Float
+        @Id
+        @GeneratedValue
+        var id: Int = 0,
+        var name: String = "",
+        var recoveryChance: Float = 0f
 )
