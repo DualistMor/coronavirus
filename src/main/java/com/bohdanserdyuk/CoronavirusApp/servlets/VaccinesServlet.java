@@ -1,6 +1,6 @@
 package com.bohdanserdyuk.CoronavirusApp.servlets;
 
-import com.bohdanserdyuk.CoronavirusApp.data.ejb.impl.VaccineEjb;
+import com.bohdanserdyuk.CoronavirusApp.model.ejb.impl.VaccineEjb;
 
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;

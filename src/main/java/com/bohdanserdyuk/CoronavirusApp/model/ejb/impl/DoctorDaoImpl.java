@@ -1,7 +1,8 @@
-package com.bohdanserdyuk.CoronavirusApp.data.ejb.impl;
+package com.bohdanserdyuk.CoronavirusApp.model.ejb.impl;
 
-import com.bohdanserdyuk.CoronavirusApp.data.ejb.InfectedDao;
-import com.bohdanserdyuk.CoronavirusApp.data.models.Infected;
+import com.bohdanserdyuk.CoronavirusApp.model.ejb.DoctorDao;
+import com.bohdanserdyuk.CoronavirusApp.model.entities.Doctor;
+import com.bohdanserdyuk.CoronavirusApp.model.entities.Infected;
 
 import javax.ejb.Stateless;
 import javax.naming.InitialContext;
@@ -13,11 +14,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 @Stateless
-public class InfectedDaoImpl implements InfectedDao {
+public class DoctorDaoImpl implements DoctorDao {
 
     private Connection mConnection;
 
-    public InfectedDaoImpl() {
+    public DoctorDaoImpl() {
         try {
             InitialContext context = new InitialContext();
             DataSource d = (DataSource) context.lookup("jdbc/MySqlDataResource");
@@ -28,14 +29,15 @@ public class InfectedDaoImpl implements InfectedDao {
     }
 
     @Override
-    public boolean saveInfected(Infected infected) {
-        String query = "INSERT INTO INFECTEDS VALUES(null, ?, ?, ?);";
+    public boolean saveDoctor(Doctor doctor) {
+        String query = "INSERT INTO DOCTORS VALUES(null, ?, ?, ?, ?);";
         try {
             PreparedStatement st = mConnection.prepareStatement(query);
 
-            st.setString(1, infected.getPhoneNumber());
-            st.setString(2, infected.getName());
-            st.setString(3, infected.getAddress());
+            st.setString(1, doctor.getName());
+            st.setString(2, doctor.getPassword());
+            st.setInt(3, doctor.getCured());
+            st.setInt(4, doctor.getDeaths());
 
             st.execute();
 
@@ -48,28 +50,29 @@ public class InfectedDaoImpl implements InfectedDao {
     }
 
     @Override
-    public Infected getInfectedByNumber(String phoneNumber) {
+    public Doctor getDoctorByName(String name) {
+        String sql = "SELECT * FROM DOCTORS WHERE name = ?;";
         try {
-            String sql = "SELECT * FROM INFECTEDS WHERE phoneNumber = ?;";
             PreparedStatement st = mConnection.prepareStatement(sql);
-            st.setString(1, phoneNumber);
+
+            st.setString(1, name);
 
             ResultSet result = st.executeQuery();
-            Infected infected = null;
+            Doctor doctor = null;
 
             if (result.next()) {
+                int id = result.getInt("id");
+                String docName = result.getString("name");
+                String password = result.getString("password");
+                int cured = result.getInt("cured");
+                int deaths = result.getInt("deaths");
 
-                String vendId = result.getString("phoneNumber");
-                String name = result.getString("name");
-                String address = result.getString("address");
-
-                infected = new Infected(vendId, name, address);
+                doctor = new Doctor(id, docName, password, cured, deaths);
             }
-
             result.close();
             st.close();
 
-            return infected;
+            return doctor;
         } catch (SQLException e) {
             e.printStackTrace();
             return null;

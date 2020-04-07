@@ -1,46 +1,43 @@
 <%--
   Created by IntelliJ IDEA.
   User: dzeko14
-  Date: 01.04.20
-  Time: 23:00
+  Date: 28.03.20
+  Time: 15:47
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title>Title</title>
+    <meta charset="UTF-8">
+    <title>Authorization</title>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <style>
         html {
-            background-color: #4285bc;
+            background-color: #03bc05;
         }
-
         body {
             font-family: "Poppins", sans-serif;
             height: 100vh;
             background-color: #4285bc;
         }
-
         a {
             color: #92badd;
-            display: inline-block;
+            display:inline-block;
             text-decoration: none;
             font-weight: 400;
         }
-
         h2 {
             text-align: center;
             font-size: 16px;
             font-weight: 600;
             text-transform: uppercase;
-            display: inline-block;
+            display:inline-block;
             margin: 40px 8px 10px 8px;
             color: #cccccc;
         }
-
         .wrapper {
             display: flex;
             align-items: center;
@@ -50,7 +47,6 @@
             min-height: 100%;
             padding: 20px;
         }
-
         #formContent {
             -webkit-border-radius: 10px 10px 10px 10px;
             border-radius: 10px 10px 10px 10px;
@@ -59,12 +55,19 @@
             max-width: 450px;
             position: relative;
             padding: 0;
-            -webkit-box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
-            box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
+            -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+            box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
             text-align: center;
         }
-
-        input[type=button], input[type=submit], input[type=reset] {
+        #formFooter {
+            background-color: #f6f6f6;
+            border-top: 1px solid #dce8f1;
+            padding: 25px;
+            text-align: center;
+            -webkit-border-radius: 0 0 10px 10px;
+            border-radius: 0 0 10px 10px;
+        }
+        input[type=button], input[type=submit], input[type=reset]  {
             background-color: #56baed;
             border: none;
             color: white;
@@ -74,8 +77,8 @@
             display: inline-block;
             text-transform: uppercase;
             font-size: 13px;
-            -webkit-box-shadow: 0 10px 30px 0 rgba(95, 186, 233, 0.4);
-            box-shadow: 0 10px 30px 0 rgba(95, 186, 233, 0.4);
+            -webkit-box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
+            box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
             -webkit-border-radius: 5px 5px 5px 5px;
             border-radius: 5px 5px 5px 5px;
             margin: 5px 20px 40px 20px;
@@ -85,19 +88,16 @@
             -o-transition: all 0.3s ease-in-out;
             transition: all 0.3s ease-in-out;
         }
-
-        input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover {
+        input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover  {
             background-color: #39ace7;
         }
-
-        input[type=button]:active, input[type=submit]:active, input[type=reset]:active {
+        input[type=button]:active, input[type=submit]:active, input[type=reset]:active  {
             -moz-transform: scale(0.95);
             -webkit-transform: scale(0.95);
             -o-transform: scale(0.95);
             -ms-transform: scale(0.95);
             transform: scale(0.95);
         }
-
         input[type=text] {
             background-color: #f6f6f6;
             color: #0d0d0d;
@@ -117,7 +117,6 @@
             -webkit-border-radius: 5px 5px 5px 5px;
             border-radius: 5px 5px 5px 5px;
         }
-
         input[type=text]:focus {
             background-color: #fff;
             border-bottom: 2px solid #5fbae9;
@@ -126,7 +125,6 @@
         input[type=text]::placeholder {
             color: #0d0d0d;
         }
-
         input[type=password] {
             background-color: #f6f6f6;
             border: none;
@@ -147,16 +145,13 @@
             -webkit-border-radius: 5px 5px 5px 5px;
             border-radius: 5px 5px 5px 5px;
         }
-
         input[type=password]:focus {
             background-color: #fff;
             border-bottom: 2px solid #5fbae9;
         }
-
         input[type=password]::placeholder {
             color: #0d0d0d;
         }
-
         .fadeInDown {
             -webkit-animation-name: fadeInDown;
             animation-name: fadeInDown;
@@ -165,7 +160,6 @@
             -webkit-animation-fill-mode: both;
             animation-fill-mode: both;
         }
-
         @-webkit-keyframes fadeInDown {
             0% {
                 opacity: 0;
@@ -178,7 +172,6 @@
                 transform: none;
             }
         }
-
         @keyframes fadeInDown {
             0% {
                 opacity: 0;
@@ -191,53 +184,88 @@
                 transform: none;
             }
         }
+        @-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+        @-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+        @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+        .fadeIn {
+            opacity:0;
+            -webkit-animation:fadeIn ease-in 1;
+            -moz-animation:fadeIn ease-in 1;
+            animation:fadeIn ease-in 1;
 
-        @-webkit-keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+            -webkit-animation-fill-mode:forwards;
+            -moz-animation-fill-mode:forwards;
+            animation-fill-mode:forwards;
+
+            -webkit-animation-duration:1s;
+            -moz-animation-duration:1s;
+            animation-duration:1s;
         }
-
-        @-moz-keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+        .fadeIn.first {
+            -webkit-animation-delay: 0.4s;
+            -moz-animation-delay: 0.4s;
+            animation-delay: 0.4s;
         }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+        .fadeIn.second {
+            -webkit-animation-delay: 0.6s;
+            -moz-animation-delay: 0.6s;
+            animation-delay: 0.6s;
         }
-
+        .fadeIn.third {
+            -webkit-animation-delay: 0.8s;
+            -moz-animation-delay: 0.8s;
+            animation-delay: 0.8s;
+        }
+        .fadeIn.fourth {
+            -webkit-animation-delay: 1s;
+            -moz-animation-delay: 1s;
+            animation-delay: 1s;
+        }
+        .underlineHover:after {
+            display: block;
+            left: 0;
+            bottom: -10px;
+            width: 0;
+            height: 2px;
+            background-color: #56baed;
+            content: "";
+            transition: width 0.2s;
+        }
+        .underlineHover:hover {
+            color: #0d0d0d;
+        }
+        .underlineHover:hover:after{
+            width: 100%;
+        }
         *:focus {
             outline: none;
         }
     </style>
 </head>
 <body>
-<div class="wrapper">
+<div class="wrapper fadeInDown">
     <div id="formContent">
-
-        <div>
-            <h1>Оновити тренування</h1>
-        </div>
-
-        <form action="updateTreatment" method="POST">
-            <input type="hidden" name="id" value="${treatment.id}"/><br/>
-            <input type="text" id="vaccineCode" value="${treatment.vaccine.code}" placeholder="Код вакцини">
-            <input type="submit" value="Оновити">
-        </form>
+        <table class="table table-bordered table-hover">
+            <caption><h3>Список інфікованих</h3></caption>
+            <thead>
+            <tr>
+                <th>Ім'я</th>
+                <th>Адреса</th>
+                <th>Вік</th>
+                <th></th>
+            </tr>
+            </thead>
+            <c:forEach var="infected" items="${infectedList}">
+                <tr>
+                    <td>${infected.name}</td>
+                    <td>${infected.address}</td>
+                    <td>${infected.age}</td>
+                    <td class="text-center"><a class='btn btn-info' href="treatment?infectedId=${infected.id}&doctorId=${doctorId}"><span class="glyphicon glyphicon-shopping-cart"></span>Почати лікування</a></td>
+                </tr>
+            </c:forEach>
+        </table>
     </div>
 </div>
+
 </body>
 </html>

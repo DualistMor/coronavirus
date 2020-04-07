@@ -1,7 +1,8 @@
 package com.bohdanserdyuk.CoronavirusApp.servlets;
 
-import com.bohdanserdyuk.CoronavirusApp.data.models.Infected;
-import com.bohdanserdyuk.CoronavirusApp.data.ejb.InfectedDao;
+import com.bohdanserdyuk.CoronavirusApp.model.ejb.impl.HashingEjb;
+import com.bohdanserdyuk.CoronavirusApp.model.entities.Doctor;
+import com.bohdanserdyuk.CoronavirusApp.model.ejb.DoctorDao;
 
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
@@ -11,11 +12,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 
 @WebServlet(name = "RegistrationServlet", urlPatterns = {"/registration"})
 public class RegistrationServlet extends HttpServlet {
     @EJB
-    InfectedDao infectedDao;
+    DoctorDao doctorDao;
+    @EJB
+    HashingEjb hashingEjb;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -24,13 +29,19 @@ public class RegistrationServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String phone = req.getParameter("phone");
+        String cured = req.getParameter("cured");
+        String deaths = req.getParameter("deaths");
         String name = req.getParameter("name");
-        String address = req.getParameter("address");
+        String password = req.getParameter("password");
 
-        Infected infected = new Infected(phone, name, address);
+        Doctor doctor = null;
+        try {
+            doctor = new Doctor(0, name, hashingEjb.cryptoHash(password), Integer.parseInt(cured), Integer.parseInt(deaths));
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
 
-        if (!infectedDao.saveInfected(infected)) {
+        if (!doctorDao.saveDoctor(doctor)) {
             RequestDispatcher rd = req.getRequestDispatcher("registration.jsp");
             req.setAttribute("regError", true);
             rd.forward(req, resp);

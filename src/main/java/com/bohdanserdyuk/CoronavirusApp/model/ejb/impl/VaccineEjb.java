@@ -1,6 +1,6 @@
-package com.bohdanserdyuk.CoronavirusApp.data.ejb.impl;
+package com.bohdanserdyuk.CoronavirusApp.model.ejb.impl;
 
-import com.bohdanserdyuk.CoronavirusApp.data.models.Vaccine;
+import com.bohdanserdyuk.CoronavirusApp.model.entities.Vaccine;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;

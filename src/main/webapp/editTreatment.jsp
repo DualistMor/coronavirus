@@ -9,7 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <html>
 <head>
-    <title>Замовити лікування</title>
+    <title>Title</title>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -227,14 +227,13 @@
 <body>
 <div class="wrapper">
     <div id="formContent">
-
         <div>
-            <h1>Замовити лікування</h1>
+            <h1>Оновити тренування</h1>
         </div>
-
-        <form action="treatment" method="POST">
-            <input type="hidden" name="vaccineCode" value="${vaccineCode}"/><br/>
-            <input type="submit" value="Замовити">
+        <form action="updateTreatment" method="POST">
+            <input type="hidden" name="id" value="${treatment.id}"/><br/>
+            <input type="text" id="vaccineCode" value="${treatment.vaccine.code}" placeholder="Код вакцини">
+            <input type="submit" value="Оновити">
         </form>
     </div>
 </div>

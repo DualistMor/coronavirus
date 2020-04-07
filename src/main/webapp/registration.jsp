@@ -236,7 +236,7 @@
 
         <c:if test="${regError}">
             <div>
-                <h3><span style="color:red"> Не вдалося зареєструвати інфікованого, спробуйте ще раз</span></h3>
+                <h3><span style="color:red"> Не вдалося зареєструвати лікаря, спробуйте ще раз</span></h3>
             </div>
         </c:if>
 
