@@ -228,11 +228,29 @@
 <div class="wrapper">
     <div id="formContent">
         <div>
-            <h1>Оновити тренування</h1>
+            <h1>Оновити лікування</h1>
         </div>
-        <form action="updateTreatment" method="POST">
-            <input type="hidden" name="id" value="${treatment.id}"/><br/>
-            <input type="text" id="vaccineCode" value="${treatment.vaccine.code}" placeholder="Код вакцини">
+        <table class="table table-bordered table-hover">
+            <caption><h3>Список вакцин</h3></caption>
+            <thead>
+            <tr>
+                <th>ID вакцини</th>
+                <th>Назва</th>
+                <th>Імовірність виздоровлення</th>
+                <th></th>
+            </tr>
+            </thead>
+            <c:forEach var="vaccine" items="${vaccines}">
+                <tr>
+                    <td>${vaccine.id}</td>
+                    <td>${vaccine.name}</td>
+                    <td>${vaccine.recoveryChance}</td>
+                </tr>
+            </c:forEach>
+        </table>
+        <form action="editTreatment" method="POST">
+            <input type="hidden" name="treatmentId" value="${treatmentId}">
+            <input type="text" name="vacId" placeholder="ID вакцини">
             <input type="submit" value="Оновити">
         </form>
     </div>

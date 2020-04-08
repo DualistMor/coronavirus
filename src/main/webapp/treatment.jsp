@@ -230,12 +230,42 @@
         <div id="formContent">
 
             <div>
-                <h2>Деталі про замовлене лікування</h2>
+                <h2>Деталі про лікування</h2>
             </div>
 
-            <h4>Назва вакцини: </h4><h5>${treatment.vaccine.name}</h5><br />
-            <h4>Телефон хворого: </h4><h5>${treatment.infectedPhone}</h5><br />
-            <a class='btn btn-danger' href="deleteTreatment?id=${treatment.id}"><span class="glyphicon glyphicon-remove"></span>Видалити</a>  <a class='btn btn-success' href="updateTreatment?id=${treatment.id}"><span class="glyphicon glyphicon-edit"></span>Оновити</a>
+            <table class="table table-bordered table-hover">
+                <caption><h3>Інформація про інфікованого</h3></caption>
+                <thead>
+                <tr>
+                    <th>Ім'я</th>
+                    <th>Адреса</th>
+                    <th>Вік</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tr>
+                    <td>${infected.name}</td>
+                    <td>${infected.address}</td>
+                    <td>${infected.age}</td>
+                </tr>
+            </table>
+
+            <table class="table table-bordered table-hover">
+                <caption><h3>Інформація про вакцину</h3></caption>
+                <thead>
+                <tr>
+                    <th>Назва</th>
+                    <th>Шанс на одужання</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tr>
+                    <td>${vaccine.name}</td>
+                    <td>${vaccine.recoveryChance}</td>
+                </tr>
+            </table>
+            <a class='btn btn-success' href="editTreatment?treatmentId=${treatment.id}"><span class="glyphicon glyphicon-remove"></span>Редагувати</a>
+            <a class='btn btn-success' href="infected?name=${doctor.name}&isDead=${isDead}"><span class="glyphicon glyphicon-edit"></span>Лікувати</a>
         </div>
     </div>
 

@@ -241,9 +241,10 @@
         </c:if>
 
         <form action="registration" method="POST">
-            <input type="text" name="phone" placeholder="Номер телефону">
             <input type="text" name="name" placeholder="Ім'я">
-            <input type="text" name="address" placeholder="Адреса">
+            <input type="text" name="password" placeholder="Пароль">
+            <input type="text" name="cured" placeholder="Вилікувано пацієнтів">
+            <input type="text" name="deaths" placeholder="не вилікувано пацієнтів">
             <input type="submit" value="Зареєструватися">
         </form>
     </div>

@@ -10,7 +10,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Authorization</title>
+    <title>nfected</title>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -246,6 +246,20 @@
 <div class="wrapper fadeInDown">
     <div id="formContent">
         <table class="table table-bordered table-hover">
+            <caption><h3>Лікарський досвід</h3></caption>
+            <thead>
+            <tr>
+                <th>Вилікувано пацієнтів</th>
+                <th>Не вилікувано пацієнтів</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tr>
+                <td>${doctor.cured}</td>
+                <td>${doctor.deaths}</td>
+            </tr>
+        </table>
+        <table class="table table-bordered table-hover">
             <caption><h3>Список інфікованих</h3></caption>
             <thead>
             <tr>
@@ -260,7 +274,7 @@
                     <td>${infected.name}</td>
                     <td>${infected.address}</td>
                     <td>${infected.age}</td>
-                    <td class="text-center"><a class='btn btn-info' href="treatment?infectedId=${infected.id}&doctorId=${doctorId}"><span class="glyphicon glyphicon-shopping-cart"></span>Почати лікування</a></td>
+                    <td class="text-center"><a class='btn btn-info' href="treatment?infectedId=${infected.id}&doctorId=${doctor.id}"><span class="glyphicon glyphicon-shopping-cart"></span>Почати лікування</a></td>
                 </tr>
             </c:forEach>
         </table>

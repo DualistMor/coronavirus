@@ -1,6 +1,7 @@
 package com.bohdanserdyuk.CoronavirusApp.servlets;
 
 import com.bohdanserdyuk.CoronavirusApp.model.ejb.impl.TreatmentEjb;
+import com.bohdanserdyuk.CoronavirusApp.model.ejb.impl.VaccineEjb;
 import com.bohdanserdyuk.CoronavirusApp.model.entities.Treatment;
 
 import javax.ejb.EJB;
@@ -16,21 +17,24 @@ import java.io.IOException;
 public class EditTreatmentServlet extends HttpServlet {
     @EJB
     TreatmentEjb treatmentEjb;
+    @EJB
+    VaccineEjb vaccineEjb;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int treatmentId = Integer.parseInt(req.getParameter("id"));
+        String treatmentId = req.getParameter("treatmentId");
         RequestDispatcher rd = req.getRequestDispatcher("editTreatment.jsp");
-        Treatment treatment = treatmentEjb.getTreatmentById(treatmentId);
-        req.setAttribute("treatment", treatment);
+        req.setAttribute("treatmentId", treatmentId);
+        req.setAttribute("vaccines", vaccineEjb.getAllVaccines());
         rd.forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int treatmentId = Integer.parseInt(req.getParameter("treatmentId"));
-        int vaccineId = Integer.parseInt(req.getParameter("vaccineId"));
+        int vaccineId = Integer.parseInt(req.getParameter("vacId"));
         treatmentEjb.updateTreatmentVaccine(treatmentId, vaccineId);
-        resp.sendRedirect("treatment");
+        RequestDispatcher rd = req.getRequestDispatcher("treatment");
+        rd.forward(req, resp);
     }
 }

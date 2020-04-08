@@ -252,18 +252,18 @@
 
         <c:if test="${authError}">
             <div class="fadeIn first">
-                <h2><span style="color:red"> Неправильний номер телефона або адреса хворого</span></h2>
+                <h2><span style="color:red"> Неправильне ім'я або пароль лікаря</span></h2>
             </div>
         </c:if>
 
         <form action="auth" method="POST">
-            <input type="text" id="login" class="fadeIn second" name="phone" placeholder="Номер телефону:">
-            <input type="text" id="password" class="fadeIn third" name="address" placeholder="Адреса:">
+            <input type="text" id="login" class="fadeIn second" name="name" placeholder="Ім'я:">
+            <input type="text" id="password" class="fadeIn third" name="password" placeholder="Пароль:">
             <input type="submit" class="fadeIn fourth" value="Увійти">
         </form>
 
         <div id="formFooter">
-            <a class="underlineHover" href="registration.jsp">Зареєструвати хворого</a>
+            <a class="underlineHover" href="registration.jsp">Зареєструвати лікаря</a>
         </div>
 
     </div>

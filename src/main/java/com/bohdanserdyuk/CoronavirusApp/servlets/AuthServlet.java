@@ -38,7 +38,8 @@ public class AuthServlet extends HttpServlet {
             if (doctor != null && doctor.getPassword().equals(hashingEjb.cryptoHash(password))) {
                 HttpSession session = req.getSession();
                 session.setAttribute(ParamsConstants.DOCTOR, doctor);
-                resp.sendRedirect("infected");
+                RequestDispatcher rd = req.getRequestDispatcher("infected");
+                rd.forward(req, resp);
             } else {
                 RequestDispatcher rd = req.getRequestDispatcher("auth.jsp");
                 req.setAttribute("authError", true);

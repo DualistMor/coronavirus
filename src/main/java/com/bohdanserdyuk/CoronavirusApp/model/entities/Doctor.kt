@@ -7,9 +7,9 @@ import javax.persistence.ManyToOne
 import javax.persistence.OneToMany
 
 data class Doctor(
-        val id: Int,
-        val name: String,
-        val password: String,
-        val cured: Int,
-        val deaths: Int
+        var id: Int,
+        var name: String,
+        var password: String,
+        var cured: Int,
+        var deaths: Int
 ) : Serializable

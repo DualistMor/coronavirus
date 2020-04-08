@@ -20,7 +20,6 @@ public class IndexServlet extends HttpServlet {
             resp.sendRedirect("auth.jsp");
             return;
         }
-
         resp.sendRedirect("vaccines");
     }
 }
