@@ -35,6 +35,11 @@ public class TreatmentEjb {
         entityManager.persist(new Treatment(0, doctorId, infectedId, null));
     }
 
+    public void removeTreatment(Treatment treatment) {
+        entityManager.remove(treatment);
+    }
+
+
     public void removeTreatmentById(int id) {
         entityManager.remove(entityManager.find(Treatment.class, id));
     }

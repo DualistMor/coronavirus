@@ -2,8 +2,10 @@ package com.bohdanserdyuk.CoronavirusApp.servlets;
 
 import com.bohdanserdyuk.CoronavirusApp.model.ejb.DoctorDao;
 import com.bohdanserdyuk.CoronavirusApp.model.ejb.impl.InfectedEjb;
+import com.bohdanserdyuk.CoronavirusApp.model.ejb.impl.TreatmentEjb;
 import com.bohdanserdyuk.CoronavirusApp.model.entities.Doctor;
 import com.bohdanserdyuk.CoronavirusApp.model.entities.Infected;
+import com.bohdanserdyuk.CoronavirusApp.model.entities.Treatment;
 
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
@@ -19,12 +21,15 @@ import java.util.List;
 public class InfectedServlet extends HttpServlet {
 
     @EJB
+    TreatmentEjb treatmentEjb;
+    @EJB
     InfectedEjb infectedEjb;
     @EJB
     DoctorDao doctorDao;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String isDeadStr = request.getParameter("isDead");
+        String infectedId = request.getParameter("infectedId");
 
         Doctor doctor = doctorDao.getDoctorByName(request.getParameter("name"));
         List<Infected> infectedList = infectedEjb.getAllInfected();
@@ -32,6 +37,11 @@ public class InfectedServlet extends HttpServlet {
         if (isDeadStr != null) {
             updateDoctorsPractice(isDeadStr, doctor);
             doctor = doctorDao.getDoctorById(doctor.getId());
+        }
+        if (infectedId != null) {
+            int infId = Integer.parseInt(infectedId);
+            infectedEjb.removeInfectedById(infId);
+            infectedList = infectedEjb.getAllInfected();
         }
 
         RequestDispatcher rd = request.getRequestDispatcher("infected.jsp");

@@ -18,6 +18,10 @@ public class InfectedEjb {
         return entityManager.createQuery("SELECT c from Infected c").getResultList();
     }
 
+    public void removeInfectedById(int id) {
+        entityManager.remove(getInfectedById(id));
+    }
+
     public Infected getInfectedById(int id) {
         return entityManager.find(Infected.class, id);
     }

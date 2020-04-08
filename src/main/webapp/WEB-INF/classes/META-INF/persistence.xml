@@ -4,6 +4,7 @@
     <persistence-unit name="NewPersistenceUnit" transaction-type="JTA">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <jta-data-source>jdbc/MySqlDataResource</jta-data-source>
+        <class>com.bohdanserdyuk.CoronavirusApp.model.entities.Infected</class>
         <class>com.bohdanserdyuk.CoronavirusApp.model.entities.Vaccine</class>
         <class>com.bohdanserdyuk.CoronavirusApp.model.entities.Treatment</class>
         <properties>

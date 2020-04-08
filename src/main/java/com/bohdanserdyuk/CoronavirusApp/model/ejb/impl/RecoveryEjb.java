@@ -9,7 +9,7 @@ import javax.ejb.Stateless;
 public class RecoveryEjb {
 
     public LifeState getInfectedTreatmentResult(Infected infected, Vaccine vaccine) {
-        if( Math.random() <= infected.getAge() / 100f - vaccine.getRecoveryChance() ) {
+        if(Math.random() <= infected.getAge() / 100f - vaccine.getRecoveryChance()) {
             return LifeState.DEAD;
         }
         return LifeState.CURED;

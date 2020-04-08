@@ -265,7 +265,7 @@
                 </tr>
             </table>
             <a class='btn btn-success' href="editTreatment?treatmentId=${treatment.id}"><span class="glyphicon glyphicon-remove"></span>Редагувати</a>
-            <a class='btn btn-success' href="infected?name=${doctor.name}&isDead=${isDead}"><span class="glyphicon glyphicon-edit"></span>Лікувати</a>
+            <a class='btn btn-success' href="infected?name=${doctor.name}&isDead=${isDead}&infectedId=${treatment.infectedId}"><span class="glyphicon glyphicon-edit"></span>Лікувати</a>
         </div>
     </div>
 
